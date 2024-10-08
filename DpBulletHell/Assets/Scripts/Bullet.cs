@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletSpeed : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float bulletSpeed = 1000f;
 
     private void Start()
     {
-        rb.AddForce(transform.up * 1000f);
+        rb.AddForce(transform.up * bulletSpeed);
     }
 }
