@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float bulletSpeed = 1000f;
 
-    private void Start()
+    private void OnEnable()
     {
         rb.AddForce(transform.up * bulletSpeed);
     }

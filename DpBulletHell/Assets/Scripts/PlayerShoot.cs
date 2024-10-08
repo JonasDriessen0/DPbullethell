@@ -26,7 +26,8 @@ public class PlayerShoot : MonoBehaviour
         if (disabledBullets.Count > 0 && disabledBullets[0].activeSelf == false)
         {
             disabledBullets[0].SetActive(true);
-            //disabledBullets[0].transform = shootTransform;
+            disabledBullets[0].transform.position = shootTransform.position;
+            disabledBullets[0].transform.rotation = shootTransform.rotation;
             var disabledBullet = disabledBullets[0];
             disabledBullets.Remove(disabledBullets[0]);
             StartCoroutine(DeactivateBullet(disabledBullet));
