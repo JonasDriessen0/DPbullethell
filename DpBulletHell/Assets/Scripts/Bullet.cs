@@ -1,15 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float bulletSpeed = 1000f;
+    [SerializeField] private float bulletSpeed = 10f;
 
-    private void OnEnable()
+    public void Shoot(Vector2 direction)
     {
-        rb.AddForce(transform.up * bulletSpeed);
+        rb.velocity = direction * bulletSpeed;
+    }
+    
+    private void OnDisable()
+    {
+        rb.velocity = Vector2.zero;
     }
 }

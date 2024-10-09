@@ -1,14 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] private Transform shootTransform;
     [SerializeField] private Transform bulletPool;
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float destroyTime;
 
     [SerializeField] private List<GameObject> disabledBullets;
@@ -23,30 +21,37 @@ public class PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
-        if (disabledBullets.Count > 0 && disabledBullets[0].activeSelf == false)
+        GameObject bulletObject;
+        if (disabledBullets.Count > 0 && !disabledBullets[0].activeSelf)
         {
-            disabledBullets[0].SetActive(true);
-            disabledBullets[0].transform.position = shootTransform.position;
-            disabledBullets[0].transform.rotation = shootTransform.rotation;
-            var disabledBullet = disabledBullets[0];
-            disabledBullets.Remove(disabledBullets[0]);
-            StartCoroutine(DeactivateBullet(disabledBullet));
+            bulletObject = disabledBullets[0];
+            bulletObject.SetActive(true);
+            bulletObject.transform.position = shootTransform.position;
+            bulletObject.transform.rotation = shootTransform.rotation;
+            disabledBullets.RemoveAt(0);
             Debug.Log("reuse bullet");
         }
         else
         {
-            var instancedBullet = Instantiate(bullet, shootTransform.position, shootTransform.rotation, bulletPool);
-            StartCoroutine(DeactivateBullet(instancedBullet));
+            bulletObject = Instantiate(bulletPrefab, shootTransform.position, shootTransform.rotation, bulletPool);
             Debug.Log("make new bullet");
         }
+
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
+        if (bullet != null)
+        {
+            bullet.Shoot(shootTransform.up);
+        }
+
+        StartCoroutine(DeactivateBullet(bulletObject));
     }
 
-    IEnumerator DeactivateBullet(GameObject instancedBullet)
+    IEnumerator DeactivateBullet(GameObject bulletObject)
     {
         yield return new WaitForSeconds(destroyTime);
         
-        instancedBullet.SetActive(false);
-        disabledBullets.Add(instancedBullet);
+        bulletObject.SetActive(false);
+        disabledBullets.Add(bulletObject);
         Debug.Log("add bullet to list");
     }
 }
