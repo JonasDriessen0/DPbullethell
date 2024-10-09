@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PlayerShoot : MonoBehaviour
+public class EnemyShoot : MonoBehaviour
 {
     [SerializeField] private Transform shootTransform;
     [SerializeField] private Transform bulletPool;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float destroyTime;
-    
-    private float lastShot;
-    [SerializeField] private float timeBetweenShots = 0.2f;
 
-    [SerializeField] private List<GameObject> disabledBullets;
+    private float lastShot;
+    [SerializeField] private float timeBetweenShots = 0.5f;
+    
+    [SerializeField] private List<GameObject> enemyDisabledBullets;
 
     private void Update()
     {
-        if (Time.time > lastShot + timeBetweenShots && Input.GetMouseButton(0))
+        if (Time.time > lastShot + timeBetweenShots)
         {
             lastShot = Time.time;
             Shoot();
@@ -26,13 +27,13 @@ public class PlayerShoot : MonoBehaviour
     private void Shoot()
     {
         GameObject bulletObject;
-        if (disabledBullets.Count > 0 && !disabledBullets[0].activeSelf)
+        if (enemyDisabledBullets.Count > 0 && !enemyDisabledBullets[0].activeSelf)
         {
-            bulletObject = disabledBullets[0];
+            bulletObject = enemyDisabledBullets[0];
             bulletObject.SetActive(true);
             bulletObject.transform.position = shootTransform.position;
             bulletObject.transform.rotation = shootTransform.rotation;
-            disabledBullets.RemoveAt(0);
+            enemyDisabledBullets.RemoveAt(0);
             Debug.Log("reuse bullet");
         }
         else
@@ -55,7 +56,7 @@ public class PlayerShoot : MonoBehaviour
         yield return new WaitForSeconds(destroyTime);
         
         bulletObject.SetActive(false);
-        disabledBullets.Add(bulletObject);
+        enemyDisabledBullets.Add(bulletObject);
         Debug.Log("add bullet to list");
     }
 }

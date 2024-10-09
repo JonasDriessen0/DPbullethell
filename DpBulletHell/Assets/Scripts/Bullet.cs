@@ -4,6 +4,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float bulletSpeed = 10f;
+    public int damage = 10;
 
     public void Shoot(Vector2 direction)
     {
