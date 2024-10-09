@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 127544132}
   m_Layer: 0
   m_Name: ShootPoint
-  m_TagString: Untagged
+  m_TagString: ShootPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2904,7 +2904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootTransform: {fileID: 127544132}
   bulletPool: {fileID: 1546845683}
-  bullet: {fileID: 3611784860334016643, guid: fdc1124adeda1ac43911f3f4607ae751, type: 3}
+  bulletPrefab: {fileID: 3611784860334016643, guid: fdc1124adeda1ac43911f3f4607ae751, type: 3}
   destroyTime: 2
   disabledBullets: []
 --- !u!1 &1975072475
