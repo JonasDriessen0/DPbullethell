@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
         rb.velocity = direction * bulletSpeed;
     }
     
-    private void OnDisable()
+    public void ResetBullet()
     {
         rb.velocity = Vector2.zero;
     }
