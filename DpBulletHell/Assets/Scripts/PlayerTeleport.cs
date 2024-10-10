@@ -44,7 +44,6 @@ public class PlayerTeleport : MonoBehaviour
         transform.position = mousePosition;
         canTeleport = false;
         lastTeleportTime = Time.time;
-
-        Debug.Log("Teleported to: " + mousePosition);
+        
     }
 }

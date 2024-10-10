@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class LookAtPlayer : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    
+    private Transform player;
+    [SerializeField] private GameObject enemyObj;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     private void Update()
     {
         Vector2 direction = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
 
-        transform.up = direction;
+        enemyObj.transform.up = direction;
     }
 }

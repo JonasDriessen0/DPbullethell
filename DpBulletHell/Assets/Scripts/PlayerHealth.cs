@@ -1,16 +1,20 @@
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
-public class EnemyHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 1000;
-    [SerializeField] private UnityEvent onDeath;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private TextMeshProUGUI healthText;
 
     private int currentHealth;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        UpdateHealthUI();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,6 +29,7 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        UpdateHealthUI();
 
         if (currentHealth <= 0)
         {
@@ -32,9 +37,14 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    private void UpdateHealthUI()
+    {
+        healthSlider.value = currentHealth;
+        healthText.text = currentHealth.ToString();
+    }
+
     private void Die()
     {
-        onDeath.Invoke();
-        Destroy(gameObject);
+        Application.Quit();
     }
 }

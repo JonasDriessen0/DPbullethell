@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7742340275520521096}
   - component: {fileID: 365259628553244528}
   m_Layer: 0
-  m_Name: PlayerObj
+  m_Name: EnemyObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b1f6a3d46bfb34bb940add3c0a218a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  enemyObj: {fileID: 3355995798409516445}
 --- !u!114 &1513934547742121814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,11 +363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootTransform: {fileID: 8096090523894841701}
-  bulletPool: {fileID: 0}
-  bulletPrefab: {fileID: 3611784860334016643, guid: fdc1124adeda1ac43911f3f4607ae751, type: 3}
   destroyTime: 2
-  timeBetweenShots: 0.03
-  enemyDisabledBullets: []
+  timeBetweenShots: 0.25
 --- !u!114 &187549944017254594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589b4a2d30a71324fb848c33222b79f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10000
+  maxHealth: 400
   onDeath:
     m_PersistentCalls:
       m_Calls: []
